@@ -35,4 +35,4 @@ TODO:
 - [ ] 
 
 Circuit:
-[Circuit](/circuit.svg)
+![circuit](https://github.com/corey-schneider/pico-crown/assets/35932803/c2beed9a-0c1c-4efc-899b-99f0abfdb46e)
