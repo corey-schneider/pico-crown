@@ -35,4 +35,4 @@ TODO:
 - [ ] 
 
 Circuit:
-![circuit](https://github.com/corey-schneider/pico-crown/assets/35932803/c2beed9a-0c1c-4efc-899b-99f0abfdb46e)
+![circuit](https://github.com/corey-schneider/pico-crown/assets/35932803/fe5d0307-3076-488f-9792-9d5ff8ff44d9)
