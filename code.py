@@ -1,7 +1,11 @@
 import os, ssl, socketpool, wifi
 import adafruit_minimqtt.adafruit_minimqtt as MQTT
 import board, time, neopixel
-import array, math, digitalio
+import array, math
+import audiomp3, audiopwmio
+
+audio = audiopwmio.PWMAudioOut(board.GP2)
+decoder = audiomp3.MP3Decoder(open("juice.mp3", "rb"))
 
 # Configure the number of WS2812 LEDs.
 NUM_LEDS = 15
@@ -82,17 +86,22 @@ def connected(client, userdata, flags, rc):
     client.subscribe(led_status_feed)
     client.subscribe(shotty_time_feed)
     client.subscribe(brightness_feed)
+    cycle_colors()
         
 def disconnected(client, userdata, rc):
     print("Disconnected from Adafruit IO.")
 
 # Function to flash the Neopixel strip with a given color and frequency
-def flash_color(color, frequency, num_flashes):
+def flash_color(color, frequency, num_flashes, with_sound=False):
+    if with_sound and not audio.playing:
+        audio.play(decoder)
     for _ in range(num_flashes):
         pixels.fill(color)
         time.sleep(1 / (2 * frequency))
         pixels.fill(BLACK)
         time.sleep(1 / (2 * frequency))
+    if with_sound and audio.playing:
+        audio.stop()
 
 def cycle_colors():
     for i in range(len(colors_to_cycle) - 1):
@@ -125,7 +134,7 @@ def message(client, topic, message):
     elif topic == shotty_time_feed:
         if message == "1":
             print("shotty time!")
-            flash_color((255, 0, 0), frequency=2, num_flashes=30)
+            flash_color((255, 0, 0), frequency=2, num_flashes=10, with_sound=True)
     elif topic == brightness_feed:
         brightness_value = int(message) / 10
         print(f"brightness: {brightness_value}")
@@ -163,3 +172,5 @@ while True:
     print("exited loop, cycling colors...")
     cycle_colors()
     # If any other non-mqtt code, run it in here
+
+
