@@ -13,9 +13,9 @@ import time
 
 print("Hello World!")
 
-audio = audiopwmio.PWMAudioOut(board.GP0)
+audio = audiopwmio.PWMAudioOut(board.GP16)
 
-decoder = audiomp3.MP3Decoder(open("juice.mp3", "rb"))
+decoder = audiomp3.MP3Decoder(open("time_to_shotty_4.mp3", "rb"))
 
 while(True):
     audio.play(decoder)

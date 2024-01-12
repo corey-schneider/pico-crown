@@ -5,7 +5,7 @@ import array, math
 import audiomp3, audiopwmio
 
 audio = audiopwmio.PWMAudioOut(board.GP16)
-decoder = audiomp3.MP3Decoder(open("juice.mp3", "rb"))
+decoder = audiomp3.MP3Decoder(open("time_to_shotty_4.mp3", "rb"))
 
 # Configure the number of WS2812 LEDs.
 NUM_LEDS = 15
@@ -127,7 +127,7 @@ def message(client, topic, message):
     elif topic == shotty_time_feed:
         if message == "1":
             print("shotty time!")
-            flash_color((255, 0, 0), frequency=2, num_flashes=10, with_sound=True)
+            flash_color((255, 0, 0), frequency=2, num_flashes=18, with_sound=True)
     elif topic == brightness_feed:
         brightness_value = int(message) / 10
         print(f"brightness: {brightness_value}")
@@ -160,8 +160,16 @@ else:
     print("Cycling through colors.")
 
 while True:
-    if mqtt_client is not None:
-        mqtt_client.loop()
+    try:
+        if mqtt_client is not None:
+            mqtt_client.loop()
+    except Exception as e:
+        print(f"MQTT connection error: {e}")
+        print("Attempting to reconnect...")
+        try:
+            mqtt_client.reconnect()
+        except Exception as e:
+            print(f"Failed to reconnect: {e}")
     print("exited loop, cycling colors...")
     cycle_colors()
     # If any other non-mqtt code, run it in here
