@@ -2,7 +2,7 @@
 
 This project utilizes the following devices:
 - Raspberry Pi Pico W
-- Bottle of Crown Royale
+- Bottle of Crown Royal
 - 2.5w speaker (pulled from an old laptop)
 - PAM8302A 2.5w amplifier
 - 0.5m of 5v WS2812B RGB LEDs, 15 LEDs total
