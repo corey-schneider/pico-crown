@@ -4,7 +4,7 @@ import board, time, neopixel
 import array, math
 import audiomp3, audiopwmio
 
-audio = audiopwmio.PWMAudioOut(board.GP2)
+audio = audiopwmio.PWMAudioOut(board.GP16)
 decoder = audiomp3.MP3Decoder(open("juice.mp3", "rb"))
 
 # Configure the number of WS2812 LEDs.
@@ -66,13 +66,6 @@ def flash_white():
         time.sleep(0.5)  # Adjust the sleep duration for the desired frequency
         pixels.fill(BLACK)
         time.sleep(0.5)
-
-# Connect to Wifi
-#print(f"Connecting to wifi")
-#wifi.radio.connect(os.getenv("WIFI_SSID"), os.getenv("WIFI_PASSWORD"))
-#print("Connected!")
-
-#pool = socketpool.SocketPool(wifi.radio)
 
 aio_username = os.getenv('AIO_USERNAME')
 aio_key = os.getenv('AIO_KEY')
@@ -172,5 +165,3 @@ while True:
     print("exited loop, cycling colors...")
     cycle_colors()
     # If any other non-mqtt code, run it in here
-
-
