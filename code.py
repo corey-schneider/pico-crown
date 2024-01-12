@@ -9,11 +9,11 @@ decoder = audiomp3.MP3Decoder(open("time_to_shotty_4.mp3", "rb"))
 
 # Configure the number of WS2812 LEDs.
 NUM_LEDS = 15
-PINOUT = board.GP0
-CYCLE_TIME = 1  # in seconds
+LED_PINOUT = board.GP0
+CYCLE_TIME = 3  # in seconds
 BRIGHTNESS = 0.8  # Adjust this value to dim or brighten the LEDs
 
-pixels = neopixel.NeoPixel(PINOUT, NUM_LEDS, brightness=BRIGHTNESS)
+pixels = neopixel.NeoPixel(LED_PINOUT, NUM_LEDS, brightness=BRIGHTNESS)
 
 # Display a pattern on the LEDs via an array of LED RGB values.
 pixel_array = [0] * NUM_LEDS
@@ -50,13 +50,13 @@ def updatePixel():
 # Colors to cycle through
 colors_to_cycle = [
     (255, 0, 0),      # Red
-    #(255, 165, 0),    # Orange
-    #(255, 255, 0),    # Yellow
+    (255, 165, 0),    # Orange
+    (255, 255, 0),    # Yellow
     (0, 255, 0),      # Green
     (0, 0, 255),      # Blue
-    #(75, 0, 130),     # Indigo
-    #(148, 0, 211),    # Violet
-    #(255, 255, 255)   # White
+    (75, 0, 130),     # Indigo
+    (148, 0, 211),    # Violet
+    (255, 255, 255)   # White
 ]
 BLACK = (0, 0, 0)
 

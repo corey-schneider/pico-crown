@@ -1,3 +1,23 @@
+#
+#
+#
+#
+#
+#
+#
+#
+#
+# This file is old and unused.
+# New code is in `code.py`
+#
+#
+#
+#
+#
+#
+#
+#
+#
 import os, ssl, socketpool, wifi
 import adafruit_minimqtt.adafruit_minimqtt as MQTT
 import board, time, neopixel
