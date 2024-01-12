@@ -73,6 +73,7 @@ aio_key = os.getenv('AIO_KEY')
 led_status_feed = aio_username + "/feeds/led_status"
 brightness_feed = aio_username + "/feeds/brightness"
 shotty_time_feed = aio_username + "/feeds/shotty_time"
+shotty_received_feed = aio_username + "/feeds/shotty_received"
 
 def connected(client, userdata, flags, rc):
     print("Connected to Adafruit IO! Listening for changes.")
@@ -127,7 +128,17 @@ def message(client, topic, message):
     elif topic == shotty_time_feed:
         if message == "1":
             print("shotty time!")
+            try:
+                mqtt_client.publish(shotty_received_feed, "shotty bell was requested...")
+                print("published request to shotty_received_feed")
+            except Exception as e:
+                print(f"Error publishing to shotty_received_feed: {e}")
             flash_color((255, 0, 0), frequency=2, num_flashes=18, with_sound=True)
+            try:
+                mqtt_client.publish(shotty_received_feed, "shotty bell was rung.")
+                print("published rung to shotty_received_feed")
+            except Exception as e:
+                print(f"Error publishing to shotty_received_feed: {e}")
     elif topic == brightness_feed:
         brightness_value = int(message) / 10
         print(f"brightness: {brightness_value}")
@@ -135,7 +146,6 @@ def message(client, topic, message):
         # Optionally, you can also update the Neopixel brightness here
         pixels.brightness = BRIGHTNESS
         updatePixel()
-
 
 if connect_to_wifi():
     pool = socketpool.SocketPool(wifi.radio)
