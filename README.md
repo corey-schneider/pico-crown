@@ -1,3 +1,5 @@
+![crown](20240112_181939.jpg)
+
 This project utilizes the following devices:
 - Raspberry Pi Pico W
 - Bottle of Crown Royale
