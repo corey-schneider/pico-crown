@@ -17,18 +17,18 @@ to accomplish the following task:
 
 Features:
 - On startup:
-  - Flash white 2 or 3 times to indicate the code is running and the LEDs are communicating
+  - Flash white 2 times to indicate the code is running and the LEDs are communicating
   - Connect to wifi in `settings.toml`
-    - If wifi connection fails for any reason, flash red 5x to indicate a wifi error
+    - If wifi connection fails for any reason, slowly flash red 5x to indicate a wifi error
   - Begin cycling all colors slowly
 - If command is received from Adafruit:
-  - `led_status_feed`
-    - ON / OFF: self explanatory
+  - `led_status_feed` (not working)
+    - ON / OFF
+    - Not working - cannot think of a valid use case
   - `shotty_time_feed`
-    - 0 / 1: begins shotty mode: plays a sound and flashes the LEDs
+    - 0 / 1: begins shotty mode: plays a sound and flashes the LEDs simultaneously
   - `brightness_feed`
     -  0.3 to 1.0: sets the brightness. Default is 0.8. Resets on reboot
-- Plays sound file
 
 Circuit:
 ![circuit](https://github.com/corey-schneider/pico-crown/assets/35932803/68b45213-672a-45fa-9ec0-e527a0d110cb)
